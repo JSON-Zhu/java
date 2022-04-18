@@ -20,6 +20,7 @@ public class Volatile implements Runnable {
         thread1.start();
         thread.run();
         thread1.run();
+        System.out.println("test");
 
     }
 
