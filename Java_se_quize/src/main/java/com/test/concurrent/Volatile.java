@@ -22,6 +22,7 @@ public class Volatile implements Runnable {
         thread1.run();
         
         //test rebase command
+        //test rebase v2
     }
 
     @Override
