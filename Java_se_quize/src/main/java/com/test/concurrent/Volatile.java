@@ -21,6 +21,7 @@ public class Volatile implements Runnable {
         thread.run();
         thread1.run();
         System.out.println("test");
+
     }
 
     @Override
