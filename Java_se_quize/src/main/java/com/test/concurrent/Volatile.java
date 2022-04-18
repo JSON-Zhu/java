@@ -18,9 +18,6 @@ public class Volatile implements Runnable {
         Thread thread1 = new Thread(bVolatile);
         thread.start();
         thread1.start();
-        thread.run();
-        thread1.run();
-
     }
 
     @Override
