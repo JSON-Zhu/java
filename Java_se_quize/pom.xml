@@ -11,4 +11,12 @@
 
     <artifactId>java_se_quize</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.16</version>
+        </dependency>
+    </dependencies>
+
 </project>

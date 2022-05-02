@@ -1,4 +1,4 @@
-package com.test.concurrent;
+package com.test.concurrent.juc;
 
 import java.util.Collections;
 import java.util.HashMap;
