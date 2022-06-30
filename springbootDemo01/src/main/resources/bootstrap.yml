@@ -1,0 +1,19 @@
+# \u6FC0\u6D3B\u914D\u7F6E\u6587\u4EF6
+spring:
+  profiles:
+    active: dev
+  application:
+    name: springbootDemo01
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.128:8848
+        namespace:
+      config:
+        file-extension: yaml
+        #namespace: fd09338b-74a0-4a1c-bb7a-3a6bc1534459 #dev env
+        server-addr: 192.168.200.128:8848
+        namespace: 6ceb22b4-d98e-4e78-8cf7-7eeb6970f931 #test env
+        extension-configs:
+          - data-id: port.yaml
+            refresh: true

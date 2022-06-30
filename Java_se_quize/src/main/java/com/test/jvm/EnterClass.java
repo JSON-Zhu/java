@@ -46,7 +46,16 @@ public class EnterClass {
 
         // 将数组作为参数传入 showArray() 方法
         enterClass.showArray(charArray);
+        System.out.println("EnterClass.recursion(100) = " + EnterClass.recursion(4));
 
+    }
+
+    public static Long recursion(int x){
+        if(x==1){
+            return 1l;
+        }else {
+            return recursion(x-1)*x;
+        }
     }
 
 }

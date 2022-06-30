@@ -19,11 +19,9 @@ public class FairLock {
     public void printMessage() {
 
         try {
-
             lock.lock();
-
+            TimeUnit.SECONDS.sleep(5);
             System.out.println(Thread.currentThread().getName() + " say hello to you");
-
 //            try {
 //                TimeUnit.MILLISECONDS.sleep(100);
 //            } catch (InterruptedException e) {
@@ -36,44 +34,68 @@ public class FairLock {
 
     }
 
+    public void printMessage2() {
+        boolean b = false;
+        try {
+            b = lock.tryLock(1, TimeUnit.SECONDS);
+            if (b){
+                System.out.println("tryLock成功");
+            }else {
+                System.out.println("tryLock失败");
+            }
+//            try {
+//                TimeUnit.MILLISECONDS.sleep(100);
+//            } catch (InterruptedException e) {
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (b) {
+                lock.unlock();
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
         // 1、创建当前类的对象
         FairLock demo = new FairLock();
 
+
+
         // 2、创建三个线程，每个线程内调用 printMessage() 方法十次
-        Thread thread = new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                demo.printMessage();
-            }
-
-        }, "thread-a");
+        new Thread(() -> {
 
 
-        Thread thread1 = new Thread(() -> {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            for (int i = 0; i < 10; i++) {
-                demo.printMessage();
-            }
+            demo.printMessage();
 
-        }, "thread-b");
 
-        Thread thread2 = new Thread(() -> {
-            try {
-                thread1.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            for (int i = 0; i < 10; i++) {
-                demo.printMessage();
-            }
+        }, "thread-a").start();
 
-        }, "thread-c");
-        thread.start();
-        thread1.start();
-        thread2.start();
+
+        new Thread(() -> {
+//            try {
+//                thread.join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+            demo.printMessage2();
+
+
+        }, "thread-b").start();
+
+        new Thread(() -> {
+//            try {
+//                thread1.join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+            demo.printMessage2();
+
+
+        }, "thread-c").start();
+
     }
 }

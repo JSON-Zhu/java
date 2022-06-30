@@ -49,8 +49,6 @@ public class RWLockWriteOnly {
             }finally {
                 readLock.unlock();
             }
-
-
             System.out.println(Thread.currentThread().getName() + " 结束执行写操作");
         }catch (Exception e){
             e.printStackTrace();

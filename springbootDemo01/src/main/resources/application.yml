@@ -1,0 +1,13 @@
+## 激活配置文件
+#spring:
+#  profiles:
+#    active: dev
+#  application:
+#    name: springbootDemo01
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.200.128:8848
+#        namespace:
+#      config:
+#        file-extension: yaml

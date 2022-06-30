@@ -12,7 +12,7 @@ import java.util.concurrent.FutureTask;
  **/
 public class Callable {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
 
         FutureTask<String> stringFutureTask = new FutureTask<>(() -> {
             String s="s2";
@@ -21,7 +21,9 @@ public class Callable {
             return "callable interface";
         });
 
-        new Thread(stringFutureTask,"thread1").start();
+        //new Thread(stringFutureTask,"thread1").start();
+
+        System.out.println(stringFutureTask.get());
 
         Thread.sleep(100);
 
@@ -30,13 +32,13 @@ public class Callable {
 
         //System.out.println(stringFutureTask.isDone());
 
-//        try {
-//            System.out.println(stringFutureTask.get());
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            System.out.println(stringFutureTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 }
