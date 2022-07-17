@@ -2,7 +2,6 @@ package com.atguigu.groupchat;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
@@ -56,6 +55,7 @@ public class ServerEnd {
                     if (next.isAcceptable()) {
                         //接收客户端连接,注册到selector
                         SocketChannel socketChannel = serverSocketChannel.accept();
+                        System.out.println(socketChannel.toString() + "::" + socketChannel.hashCode());
                         socketChannel.configureBlocking(false);
                         System.out.println(socketChannel.getRemoteAddress() + "上线了.");
                         String key = socketChannel.getRemoteAddress().toString().split(":")[1];
@@ -134,7 +134,7 @@ public class ServerEnd {
             //serverChannel也注册进了selector,需要排除
             Channel channel1 = selectionKey.channel();
             if (channel1 instanceof SocketChannel
-                    && !(channel1 == channel)
+               //     && !(channel1 == channel)
             ) {
                 //SocketChannel socketChannel = (SocketChannel) channel1;
                 ByteBuffer wrap = ByteBuffer.wrap(msg.getBytes());

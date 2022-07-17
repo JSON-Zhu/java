@@ -12,17 +12,19 @@ import java.util.concurrent.*;
  **/
 public class D02Executors implements RejectedExecutionHandler {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3, 5, 5, TimeUnit.SECONDS
-                , new ArrayBlockingQueue<>(3), Executors.defaultThreadFactory(), new ThreadPoolExecutor.CallerRunsPolicy());
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 1, 5, TimeUnit.SECONDS
+                , new ArrayBlockingQueue<>(2), Executors.defaultThreadFactory(), new D02Executors());
+
+        Future<?> submit = threadPoolExecutor.submit(() -> System.out.println("调用runnable方法"));
+        System.out.println(submit.get());
 
         try {
             for (int i = 0; i < 9; i++) {
                 int finalI = i;
-                threadPoolExecutor.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+" : "+ finalI +"执行了业务逻辑");
-                });
+                //TimeUnit.SECONDS.sleep(1);
+                threadPoolExecutor.execute(()-> System.out.println(Thread.currentThread().getName()+" : "+ finalI +"执行了业务逻辑"));
             }
         }catch (Exception e){
             e.printStackTrace();
